@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Talker - AI Chat</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="app-container">
+        <!-- 侧边栏 -->
+        <div class="sidebar">
+            <div class="sidebar-header">
+                <h1><i class="fas fa-robot"></i> Talker</h1>
+                <p>AI Chat Assistant</p>
+            </div>
+            
+            <div class="api-key-section">
+                <h3><i class="fas fa-key"></i> API Key</h3>
+                <div class="api-key-input">
+                    <input type="password" id="apiKeyInput" placeholder="Enter your DeepSeek API key">
+                    <div class="api-key-buttons">
+                        <button id="saveApiKeyBtn" class="btn-primary">
+                            <i class="fas fa-save"></i> Save
+                        </button>
+                        <button id="clearApiKeyBtn" class="btn-secondary">
+                            <i class="fas fa-trash"></i> Clear
+                        </button>
+                    </div>
+                </div>
+                <div class="api-status" id="apiStatus">
+                    <span class="status-indicator" id="statusIndicator"></span>
+                    <span id="statusText">Not configured</span>
+                </div>
+            </div>
+            
+            
+            
+            <div class="sidebar-actions">
+                <button id="newChatBtn" class="btn-secondary">
+                    <i class="fas fa-plus"></i> New Chat
+                </button>
+                <button id="historyBtn" class="btn-secondary">
+                    <i class="fas fa-history"></i> History
+                </button>
+            </div>
+        </div>
+
+        <!-- 主聊天区域 -->
+        <div class="main-content">
+            <div class="chat-container">
+                <div class="chat-header">
+                    <h2><i class="fas fa-comments"></i> Chat with AI</h2>
+                    <div class="chat-info">
+                        <span id="messageCount">0 messages</span>
+                    </div>
+                </div>
+                
+                <div class="messages-container" id="messagesContainer">
+                    <div class="welcome-message">
+                        <div class="welcome-icon">
+                            <i class="fas fa-robot"></i>
+                        </div>
+                        <h3>Welcome to Talker!</h3>
+                        <p>Start a conversation with your AI assistant. Make sure to set your DeepSeek API key first.</p>
+                    </div>
+                </div>
+                
+                <div class="input-container">
+                    <div class="input-wrapper">
+                        <textarea 
+                            id="messageInput" 
+                            placeholder="Type your message here..."
+                            rows="1"
+                        ></textarea>
+                        <button id="sendBtn" class="send-btn" disabled>
+                            <i class="fas fa-paper-plane"></i>
+                        </button>
+                    </div>
+                    <div class="input-footer">
+                        <span class="typing-indicator" id="typingIndicator" style="display: none;">
+                            <i class="fas fa-spinner fa-spin"></i> AI is thinking...
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="renderer.js"></script>
+</body>
+</html>

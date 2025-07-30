@@ -1,0 +1,65 @@
+{
+  "name": "talker",
+  "version": "1.0.0",
+  "description": "AI Chat Application with DeepSeek",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron .",
+    "dev": "electron . --dev",
+    "build": "electron-builder",
+    "dist": "electron-builder --publish=never",
+    "pack": "electron-packager . Talker --platform=win32 --arch=x64 --out=dist --overwrite",
+    "pack-all": "electron-packager . Talker --platform=win32,darwin,linux --arch=x64 --out=dist --overwrite"
+  },
+  "keywords": [
+    "electron",
+    "ai",
+    "chat",
+    "deepseek"
+  ],
+  "author": "Your Name",
+  "license": "MIT",
+  "devDependencies": {
+    "electron": "^28.0.0",
+    "electron-builder": "^24.9.1",
+    "electron-packager": "^17.1.2"
+  },
+  "dependencies": {
+    "openai": "^4.20.1"
+  },
+  "build": {
+    "appId": "com.talker.app",
+    "productName": "Talker",
+    "directories": {
+      "output": "dist"
+    },
+    "files": [
+      "main.js",
+      "preload.js",
+      "renderer.js",
+      "index.html",
+      "styles.css",
+      "test-api.js",
+      "README.md",
+      "node_modules/**/*"
+    ],
+    "win": {
+
+      "target": "portable",
+      "sign": false,
+      "certificateFile": "",
+      "certificatePassword": "",
+      "signingHashAlgorithms": [],
+      "rfc3161TimeStampServer": ""
+    },
+    "mac": {
+      "target": "dmg",
+      "sign": false
+    },
+    "linux": {
+      "target": "AppImage"
+    },
+    "forceCodeSigning": false,
+    "publish": null
+  }
+}

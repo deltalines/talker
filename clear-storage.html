@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>清除API密钥存储</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 600px;
+            margin: 50px auto;
+            padding: 20px;
+            background: #f5f5f5;
+        }
+        .container {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        button {
+            background: #e74c3c;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 16px;
+            margin: 10px 5px;
+        }
+        button:hover {
+            background: #c0392b;
+        }
+        .success {
+            color: #27ae60;
+            font-weight: bold;
+        }
+        .info {
+            background: #3498db;
+            color: white;
+            padding: 15px;
+            border-radius: 6px;
+            margin: 20px 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🔧 清除Talker API密钥存储</h1>
+        
+        <div class="info">
+            <strong>说明：</strong>这个页面可以帮助你清除浏览器中保存的无效API密钥。
+            如果你遇到401错误或API密钥格式问题，请使用此工具。
+        </div>
+        
+        <h3>当前存储的API密钥：</h3>
+        <div id="currentKey">正在检查...</div>
+        
+        <h3>操作：</h3>
+        <button onclick="clearApiKey()">清除API密钥</button>
+        <button onclick="checkStorage()">重新检查</button>
+        
+        <div id="result"></div>
+        
+        <h3>使用说明：</h3>
+        <ol>
+            <li>点击"清除API密钥"按钮清除存储的密钥</li>
+            <li>重新启动Talker应用</li>
+            <li>在应用中重新输入正确的DeepSeek API密钥</li>
+        </ol>
+    </div>
+
+    <script>
+        function checkStorage() {
+            const apiKey = localStorage.getItem('deepseek_api_key');
+            const currentKeyDiv = document.getElementById('currentKey');
+            
+            if (apiKey) {
+                const maskedKey = apiKey.substring(0, 10) + '...' + apiKey.substring(apiKey.length - 4);
+                currentKeyDiv.innerHTML = `
+                    <strong>已保存的密钥：</strong> ${maskedKey}<br>
+                    <strong>密钥长度：</strong> ${apiKey.length} 字符<br>
+                    <strong>是否包含无效字符：</strong> ${apiKey.includes('()') ? '是' : '否'}
+                `;
+            } else {
+                currentKeyDiv.innerHTML = '<strong>未找到保存的API密钥</strong>';
+            }
+        }
+        
+        function clearApiKey() {
+            if (confirm('确定要清除保存的API密钥吗？')) {
+                localStorage.removeItem('deepseek_api_key');
+                document.getElementById('result').innerHTML = '<div class="success">✅ API密钥已成功清除！</div>';
+                checkStorage();
+            }
+        }
+        
+        // 页面加载时检查
+        checkStorage();
+    </script>
+</body>
+</html> 
